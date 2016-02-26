@@ -40,7 +40,7 @@ Approximately total reward: 9 Billion (9,000,000,000) during first year then iss
 Compiling Linux Wallet
 ----------------------
 
-if you have never compiled a wallet in linux before, here are the dependencies you will need:
+if you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
     sudo apt-get install build-essential pkg-config libtool autotools-dev autoconf automake libssl-dev libboost-all-dev  libminiupnpc-dev libdb++-dev libdb-dev qt4-qmake libqt4-dev libqrencode-dev libssl-dev git
 
@@ -54,7 +54,7 @@ to make the qt gui wallet:
 
 then
 
-type `sudo cp ~/verge/src/verged /usr/bin/` after you have typed that. Your Verge daemon will now be accessiable system wide.
+type `sudo cp ~/verge/src/verged /usr/bin/` after you have typed that. Your Verge daemon will now be accessible system wide.
 
 after that has been done, type cd ~/ to get back to the home folder and type `verged` this will tell you that you need to make a VERGE.conf with it supplying you an output
 
