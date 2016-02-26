@@ -146,7 +146,7 @@ OBJS= \
     obj/scrypt-arm.o
 
 
-all: dogecoindarkd
+all: verged
 
 test check: test_verge FORCE
 	./test_verge
