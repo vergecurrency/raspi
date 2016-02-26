@@ -1,3 +1,6 @@
+env:
+  - ARCH=x64
+  - ARCH=arm
 language: cpp
 compiler:
 - gcc
