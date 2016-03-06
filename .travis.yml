@@ -1,6 +1,6 @@
-env:
-  - ARCH=x64
-  - ARCH=arm
+matrix:
+  include:
+- env: BUILD=android ABILIST='armeabi armeabi-v7a arm64-v8a'
 language: cpp
 compiler:
 - gcc
