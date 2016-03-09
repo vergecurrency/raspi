@@ -55,7 +55,13 @@ to make the qt gui wallet:
 
 If you receive the following error:
 *********************************************************************
-make: *** [obj/checkpoints.o] Error 4 please follow the below steps:
+g++: internal compiler error: Killed (program cc1plus)
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <file:///usr/share/doc/gcc-4.6/README.Bugs> for instructions.
+make: *** [obj/checkpoints.o] Error 4
+
+please follow the below steps:
 
 $ sudo dd if=/dev/zero of=/swapfile1 bs=1024 count=524288 
 
