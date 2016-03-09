@@ -58,9 +58,13 @@ If you receive the following error:
 make: *** [obj/checkpoints.o] Error 4 please follow the below steps:
 
 $ sudo dd if=/dev/zero of=/swapfile1 bs=1024 count=524288 
+
 $ sudo mkswap /swapfile1
+
 $ sudo chown root:root /swapfile1
+
 $ sudo chmod 0600 /swapfile1
+
 $ sudo swapon /swapfile1
 
 Then you edit your fstab
