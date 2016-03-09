@@ -46,11 +46,11 @@ if you have never compiled a wallet on a raspberry pi before, here are the depen
 
 to clone and compile:
 
-    git clone https://github.com/vergecurrency/verge && cd verge/src && make -f makefile.unix
+    git clone https://github.com/vergecurrency/raspi && cd verge/src && make -f makefile.unix
 
 to make the qt gui wallet:
 
-    git clone https://github.com/vergecurrency/verge && cd verge && qmake && make
+    git clone https://github.com/vergecurrency/raspi && cd verge && qmake && make
 
 then
 
