@@ -89,7 +89,7 @@ Re-run the Compile command "make -f makefile.unix" after creating the new swap f
 
 Afterwords
 
-type `sudo cp ~/verge/src/verged /usr/bin/` after you have typed that. Your Verge daemon will now be accessible system wide.
+type `sudo cp ~/raspi/src/verged /usr/bin/` after you have typed that. Your Verge daemon will now be accessible system wide.
 
 after that has been done, type cd ~/ to get back to the home folder and type `verged` this will tell you that you need to make a VERGE.conf with it supplying you an output
 
