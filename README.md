@@ -48,13 +48,6 @@ Total Supply
 Approximately total reward: 9 Billion (9,000,000,000) during first year then issuing 1 billion (1,000,000,000) each year after.
 
 
-
-
-
-
-
-
-
 Compiling Linux Wallet
 #########################################################################
 If you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
