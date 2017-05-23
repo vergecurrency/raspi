@@ -35,7 +35,6 @@
 extern "C" {
 #ifndef NOSSE
 #ifndef NO_ASM
-#include <xmmintrin.h>
 #endif
 #endif
 }
