@@ -18,9 +18,6 @@ Version 2.0
 
 May 22nd 2017
 
-
-
-
 Introduction
 #########################################################################
 This setup guide walks you through the procedure required to compile and run the Verge [$XVG] Linux wallet on a Raspberry Pi 2B/3. Within this guide you will discover not only how to compile the linux wallet on Linux but also how to troubleshoot common issues associated with compiling a wallet for the first time.
@@ -92,10 +89,6 @@ daemon=1
 
 1. Type cd ~/
 2. To check the status of how much is synced type &#39;verged getinfo&#39;
-
-
-
-
 
 Troubleshooting
 #########################################################################
