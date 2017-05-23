@@ -59,27 +59,28 @@ Compiling Linux Wallet
 #########################################################################
 If you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
-1. sudo apt-get install build-essential pkg-config libtool autotools-dev autoconf automake libssl-dev libboost-all-dev  libminiupnpc-dev libdb++-dev libdb-dev qt4-qmake libqt4-dev libqrencode-dev libssl-dev git
-2. to clone and compile:
-  1. git clone https://github.com/vergecurrency/raspi &amp;&amp; cd raspi/src &amp;&amp; make -f makefile.unix
-3. to make the qt gui wallet:
-  1. git clone https://github.com/vergecurrency/raspi &amp;&amp; cd raspi &amp;&amp; qmake &amp;&amp; make
+if you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
-1. Type
+    sudo apt-get install build-essential pkg-config libtool autotools-dev autoconf automake libssl-dev libboost-all-dev  libminiupnpc-dev libdb++-dev libdb-dev qt4-qmake libqt4-dev libqrencode-dev libssl-dev git
 
--
-  1. $ sudo cp ~/raspi/src/verged /usr/bin/
+to clone and compile:
+
+    git clone https://github.com/vergecurrency/raspi && cd raspi/src && make -f makefile.unix
+
+to make the qt gui wallet:
+
+    git clone https://github.com/vergecurrency/raspi && cd raspi && qmake && make
+
+Type
+$ sudo cp ~/raspi/src/verged /usr/bin/
 
 Your Verge daemon will now be accessible system wide.
 
 After that has been done, type cd ~/ to get back to the home folder.
 
-1. Type
-
--
-  1. &#39;Verged&#39;
+Type 'verged'
     1. Copy the output statement
-    2. Cd ~/.VERGE
+    2. cd ~/.VERGE
     3. $ sudo nano VERGE.conf
     4. Paste the earlier output statement into this config file.
     5. Append the following to the end of the statement
@@ -107,7 +108,11 @@ Troubleshooting
 #########################################################################
 If you receive the following error:
 
-_&quot;g++: internal compiler error: Killed (program cc1plus) Please submit a full bug report, with preprocessed source if appropriate. See file:///usr/share/doc/gcc-4.6/README.Bugs for instructions. make: \*\*\* [obj/checkpoints.o] Error 4&quot;_
+g++: internal compiler error: Killed (program cc1plus)
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <file:///usr/share/doc/gcc-4.6/README.Bugs> for instructions.
+make: *** [obj/checkpoints.o] Error 4
 
 - Follow the below steps:
 
