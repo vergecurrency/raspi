@@ -15,9 +15,9 @@ VERGE [XVG] Raspberry Pi Source Code
 Specifications:
 --------------
 
-* Algorithm: scrypt
+* Algorithm: scrypt, x17, Lyra2rev2, myr-groestl, & blake2s
 * PoW (proof of work)
-* Blocktime: ~5 minutes
+* Blocktime: ~1 minute
 * RPC port: 20102
 * P2P port: 21102
 * Blockreward: 
@@ -35,6 +35,8 @@ Total Supply
 ------------
 
 Approximately total reward: 9 Billion (9,000,000,000) during first year then issuing 1 billion (1,000,000,000) each year after.
+
+16,550,000,000 XVG Total Supply to be issued.
 
 
 Compiling Linux Wallet
