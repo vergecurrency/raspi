@@ -2,11 +2,14 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#ifdef WIN32
+#include <winsock2.h>
+#endif
 #include "net.h"
 #include "bitcoinrpc.h"
 #include "alert.h"
 #include "wallet.h"
-#include "db.h"
+#include "dbx.h"
 #include "walletdb.h"
 
 using namespace json_spirit;
@@ -52,7 +55,7 @@ Value getpeerinfo(const Array& params, bool fHelp)
         Object obj;
 
         obj.push_back(Pair("addr", stats.addrName));
-        obj.push_back(Pair("services", strprintf("%08"PRI64x, stats.nServices)));
+        obj.push_back(Pair("services", strprintf("%08" PRI64x, stats.nServices)));
         obj.push_back(Pair("lastsend", (boost::int64_t)stats.nLastSend));
         obj.push_back(Pair("lastrecv", (boost::int64_t)stats.nLastRecv));
         obj.push_back(Pair("conntime", (boost::int64_t)stats.nTimeConnected));
@@ -69,16 +72,13 @@ Value getpeerinfo(const Array& params, bool fHelp)
     return ret;
 }
 
-extern CCriticalSection cs_mapAlerts;
-extern map<uint256, CAlert> mapAlerts;
- 
 // ppcoin: send alert.  
 // There is a known deadlock situation with ThreadMessageHandler
 // ThreadMessageHandler: holds cs_vSend and acquiring cs_main in SendMessages()
 // ThreadRPCServer: holds cs_main and acquiring cs_vSend in alert.RelayTo()/PushMessage()/BeginMessage()
 Value sendalert(const Array& params, bool fHelp)
 {
-    if (fHelp || params.size() < 6)
+    if (fHelp || params.size() < 7)
         throw runtime_error(
             "sendalert <message> <privatekey> <minver> <maxver> <priority> <id> [cancelupto]\n"
             "<message> is the alert text message\n"
@@ -87,6 +87,7 @@ Value sendalert(const Array& params, bool fHelp)
             "<maxver> is the maximum applicable internal client version\n"
             "<priority> is integer priority number\n"
             "<id> is the alert id\n"
+            "<expiration time> time in hours\n"
             "[cancelupto] cancels all alert id's up to this number\n"
             "Returns true or false.");
 
@@ -98,11 +99,11 @@ Value sendalert(const Array& params, bool fHelp)
     alert.nMaxVer = params[3].get_int();
     alert.nPriority = params[4].get_int();
     alert.nID = params[5].get_int();
-    if (params.size() > 6)
-        alert.nCancel = params[6].get_int();
+    alert.nRelayUntil = GetAdjustedTime() + params[6].get_int() * 3600;
+    alert.nExpiration = GetAdjustedTime() + params[6].get_int() * 3600;
+    if (params.size() > 7)
+        alert.nCancel = params[7].get_int();
     alert.nVersion = PROTOCOL_VERSION;
-    alert.nRelayUntil = GetAdjustedTime() + 365*24*60*60;
-    alert.nExpiration = GetAdjustedTime() + 365*24*60*60;
 
     CDataStream sMsg(SER_NETWORK, PROTOCOL_VERSION);
     sMsg << (CUnsignedAlert)alert;

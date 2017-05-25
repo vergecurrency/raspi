@@ -9,7 +9,7 @@
 #include "ui_interface.h"
 #include "base58.h"
 #include "bitcoinrpc.h"
-#include "db.h"
+#include "dbx.h"
 
 #undef printf
 #include <boost/asio.hpp>
@@ -34,6 +34,10 @@ using namespace boost::asio;
 using namespace json_spirit;
 
 void ThreadRPCServer2(void* parg);
+
+// Key used by getwork/getblocktemplate miners.
+// Allocated in StartRPCThreads, free'd in StopRPCThreads
+CReserveKey* pMiningKey = NULL;
 
 static std::string strRPCUserColonPass;
 
@@ -239,6 +243,7 @@ static const CRPCCommand vRPCCommands[] =
     { "getrawmempool",          &getrawmempool,          true,   false },
     { "getblock",               &getblock,               false,  false },
     { "getblockbynumber",       &getblockbynumber,       false,  false },
+    { "getrawblockbynumber",    &getrawblockbynumber,    false,  false },
     { "getblockhash",           &getblockhash,           false,  false },
     { "gettransaction",         &gettransaction,         false,  false },
     { "listtransactions",       &listtransactions,       false,  false },
@@ -356,7 +361,7 @@ static string HTTPReply(int nStatus, const string& strMsg, bool keepalive)
             "HTTP/1.1 %d %s\r\n"
             "Date: %s\r\n"
             "Connection: %s\r\n"
-            "Content-Length: %"PRIszu"\r\n"
+            "Content-Length: %" PRIszu"\r\n"
             "Content-Type: application/json\r\n"
             "Server: VERGE-json-rpc/%s\r\n"
             "\r\n"
@@ -511,8 +516,6 @@ bool ClientAllowed(const boost::asio::ip::address& address)
       || address.to_v6().is_v4_mapped()))
         return ClientAllowed(address.to_v6().to_v4());
 
-	std::string ipv4addr = address.to_string();
-
     if (address == asio::ip::address_v4::loopback()
      || address == asio::ip::address_v6::loopback()
      || (address.is_v4()
@@ -633,6 +636,9 @@ void ThreadRPCServer(void* parg)
     // Make this thread recognisable as the RPC listener
     RenameThread("bitcoin-rpclist");
 
+    // getwork/getblocktemplate mining rewards paid here:
+    pMiningKey = new CReserveKey(pwalletMain);
+
     try
     {
         vnThreadsRunning[THREAD_RPCLISTENER]++;
@@ -646,6 +652,9 @@ void ThreadRPCServer(void* parg)
         vnThreadsRunning[THREAD_RPCLISTENER]--;
         PrintException(NULL, "ThreadRPCServer()");
     }
+
+    delete pMiningKey; pMiningKey = NULL;
+
     printf("ThreadRPCServer exited\n");
 }
 
@@ -1159,6 +1168,7 @@ Array RPCConvertValues(const std::string &strMethod, const std::vector<std::stri
     if (strMethod == "getblock"               && n > 1) ConvertTo<bool>(params[1]);
     if (strMethod == "getblockbynumber"       && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "getblockbynumber"       && n > 1) ConvertTo<bool>(params[1]);
+    if (strMethod == "getrawblockbynumber"    && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "getblockhash"           && n > 0) ConvertTo<boost::int64_t>(params[0]);
     if (strMethod == "move"                   && n > 2) ConvertTo<double>(params[2]);
     if (strMethod == "move"                   && n > 3) ConvertTo<boost::int64_t>(params[3]);

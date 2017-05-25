@@ -12,7 +12,6 @@ using namespace boost;
 
 
 static uint64 nAccountingEntryNumber = 0;
-extern bool fWalletUnlockMintOnly;
 
 //
 // CWalletDB
@@ -673,4 +672,4 @@ bool CWalletDB::Recover(CDBEnv& dbenv, std::string filename, bool fOnlyKeys)
 bool CWalletDB::Recover(CDBEnv& dbenv, std::string filename)
 {
     return CWalletDB::Recover(dbenv, filename, false);
-} 
+}

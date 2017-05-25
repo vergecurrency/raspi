@@ -1,4 +1,5 @@
 /*Copyright (C) 2009 Cleriot Simon
+* 2016 Verge
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU Lesser General Public
@@ -21,7 +22,7 @@ ChatWindow::ChatWindow(QWidget *parent)
     : QWidget(parent), ui(new Ui::ChatWindowClass)
 {
     ui->setupUi(this);
-    setFixedSize(750,600);
+    setFixedSize(750,575);
     ui->splitter->hide();
 
 	connect(ui->buttonConnect, SIGNAL(clicked()), this, SLOT(connecte()));
