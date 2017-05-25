@@ -8,12 +8,13 @@
 #include "uint256.h"
 
 #ifndef WIN32
-#include <sys/types.h>
-#include <sys/time.h>
 #include <sys/resource.h>
-#else
-typedef int pid_t; /* define for Windows compatibility */
+#include <sys/time.h>
+#include <sys/types.h>
 #endif
+
+#include "compat.h"
+
 #include <map>
 #include <vector>
 #include <string>
@@ -150,6 +151,7 @@ extern bool fRequestShutdown;
 extern bool fShutdown;
 extern bool fDaemon;
 extern bool fServer;
+extern bool fHeadless;
 extern bool fCommandLine;
 extern std::string strMiscWarning;
 extern bool fTestNet;
@@ -215,7 +217,9 @@ boost::filesystem::path GetDefaultDataDir();
 const boost::filesystem::path &GetDataDir(bool fNetSpecific = true);
 boost::filesystem::path GetConfigFile();
 boost::filesystem::path GetPidFile();
+#ifndef WIN32
 void CreatePidFile(const boost::filesystem::path &path, pid_t pid);
+#endif
 void ReadConfigFile(std::map<std::string, std::string>& mapSettingsRet, std::map<std::string, std::vector<std::string> >& mapMultiSettingsRet);
 #ifdef WIN32
 boost::filesystem::path GetSpecialFolderPath(int nFolder, bool fCreate = true);
@@ -227,7 +231,6 @@ uint256 GetRandHash();
 int64 GetTime();
 void SetMockTime(int64 nMockTimeIn);
 int64 GetAdjustedTime();
-long hex2long(const char* hexString);
 std::string FormatFullVersion();
 std::string FormatSubVersion(const std::string& name, int nClientVersion, const std::vector<std::string>& comments);
 void AddTimeData(const CNetAddr& ip, int64 nTime);
@@ -243,7 +246,7 @@ void runCommand(std::string strCommand);
 
 inline std::string i64tostr(int64 n)
 {
-    return strprintf("%"PRI64d, n);
+    return strprintf("%" PRI64d, n);
 }
 
 inline std::string itostr(int n)
@@ -540,7 +543,6 @@ private:
     std::vector<T> vValues;
     std::vector<T> vSorted;
     unsigned int nSize;
-    T tInitial;
 public:
     CMedianFilter(unsigned int size, T initial_value):
         nSize(size)
@@ -548,7 +550,6 @@ public:
         vValues.reserve(size);
         vValues.push_back(initial_value);
         vSorted = vValues;
-        tInitial = initial_value;
     }
 
     void input(T value)
@@ -558,27 +559,6 @@ public:
             vValues.erase(vValues.begin());
         }
         vValues.push_back(value);
-
-        vSorted.resize(vValues.size());
-        std::copy(vValues.begin(), vValues.end(), vSorted.begin());
-        std::sort(vSorted.begin(), vSorted.end());
-    }
-
-    // remove last instance of a value
-    void removeLast(T value)
-    {
-        for (int i = vValues.size()-1; i >= 0; --i)
-        {
-            if (vValues[i] == value)
-            {
-                vValues.erase(vValues.begin()+i);
-                break;
-            }
-        }
-        if (vValues.empty())
-        {
-            vValues.push_back(tInitial);
-        }
 
         vSorted.resize(vValues.size());
         std::copy(vValues.begin(), vValues.end(), vSorted.begin());

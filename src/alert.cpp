@@ -16,13 +16,10 @@ using namespace std;
 map<uint256, CAlert> mapAlerts;
 CCriticalSection cs_mapAlerts;
 
-static const char* pszMainKey = "04b96732cfbbaceb1206b3c152159bc29cefd51c8416ed2e3071772ad18365da01ce89bf2c0438f9c79fb40a2e4ea78d0c72c619136ed65374ca8280a15fabd636";
+static const char* pszMainKey = "0401b65f9bc3b879724d499eb8f39d2d877c6d9a3d70451d6fd989258faafce8eb29297fac33ebcf4d0a329d0d1cc6e462cc7a134e0cec053167fe481fef86d96a";
 
 // TestNet alerts pubKey
-static const char* pszTestKey = "04c6459c72497d64e2b9de7d5825900398092572fff9c76506341483365e2c11803c1d034e6ce144480f8583ac19c2d52c2f6c19533f774cd0e37f60d3fee5b302";
-
-// TestNet alerts private key
-// "73285304787238d14382fff3ea8d5599ab3afd37aad8173f4e4ddbe5cd283fa5"
+static const char* pszTestKey = "045894f38e9dd72b6f210c261d40003eb087030c42b102d3b238b396256d02f5a380ff3b7444d306d9e118fa1fc7b2b7594875f4eb64bbeaa31577391d85eb5a8a";
 
 void CUnsignedAlert::SetNull()
 {
@@ -53,8 +50,8 @@ std::string CUnsignedAlert::ToString() const
     return strprintf(
         "CAlert(\n"
         "    nVersion     = %d\n"
-        "    nRelayUntil  = %"PRI64d"\n"
-        "    nExpiration  = %"PRI64d"\n"
+        "    nRelayUntil  = %" PRI64d"\n"
+        "    nExpiration  = %" PRI64d"\n"
         "    nID          = %d\n"
         "    nCancel      = %d\n"
         "    setCancel    = %s\n"

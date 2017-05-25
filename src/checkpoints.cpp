@@ -7,7 +7,7 @@
 
 #include "checkpoints.h"
 
-#include "db.h"
+#include "dbx.h"
 #include "main.h"
 #include "uint256.h"
 
@@ -24,7 +24,7 @@ namespace Checkpoints
     //
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
-        (     0, hashGenesisBlockOfficial )
+        (     0,  hashGenesisBlockOfficial)
         (  15000, uint256("0x000000000265c5f4683b169a68cb3cac89287c8b5df94e17b09ef19ac718026b"))
         (  30000, uint256("0x0000000003dddf9e84b1246e9a0bd7ceb2672998294e8c823d5ef288fa3781f4"))
 	(  45000, uint256("0x000000000321d6be8ffe446a9183f7605e40f523436479b713762346ae65a3bd"))
@@ -37,12 +37,33 @@ namespace Checkpoints
 	(  219912, uint256("0x00000000010751365b77b28dc6af3c33e6c620e45a166c659a2056dc7cb3af0a"))
 	(  222222, uint256("0x00000000003c92cf2938d35cf4006fc21a251d82456780cafb43ab908eef9aff"))
 	(  244219, uint256("0x000000000139613d26f7436ecc568feb566c22d9a664359e53f0d0a542d5bdba"))
-	;
+	(  400000, uint256("0x0000000001d45af6613024ad5668bfa4909ac63e2b29c28042013d77a216830d"))
+	(  500000, uint256("0x0000000003700a4e9d81a67036d7647361086527e985cdf764648c5e61d07303"))
+	(  600000, uint256("0x30fa1eab961c99f6222f9925a27136c34ea27182c92e4f8c48ea3a90c7c2eb25"))
+	(  700000, uint256("0x3e4f3319706870bb149d1a976202c2a5e973384d181a600e7be59cbab5b63132"))
+	(  800000, uint256("0xf6b5f222bcc2f4e2439ccf6050d4ea3e9517c3752c3247302f039822ac9cc870"))
+	(  900000, uint256("0xc4d8b4079da888985854eda0200fb57045c2c70b29f10e98543f7c4076129e91"))
+	( 1000000, uint256("0x000000000049eaba3d6c29d9f45bc2a944b46eec005e2b038f1ee924f2f9c029"))
+	( 1100000, uint256("0xc766387a2e0cd6af995ea432518614824fe313e988598ea8b26f58efb99ebcdc"))
+	( 1145029, uint256("0x04def2ba205c1e5f4b33873bc9e5b0a54311370e823686aeb4d5aab0bf021899"))
+        ;
 
     static MapCheckpoints mapCheckpointsTestnet =
         boost::assign::map_list_of
         ( 0, hashGenesisBlockTestNet )
         ;
+
+    static bool HACK_RELOAD = false;
+
+    void SetHackReload(bool val)
+    {
+        HACK_RELOAD = val;
+    }
+
+    bool GetHackReload()
+    {
+        return HACK_RELOAD;
+    }
 
     bool CheckHardened(int nHeight, const uint256& hash)
     {
@@ -197,11 +218,11 @@ namespace Checkpoints
         return false;
     }
 
-    // Automatically select a suitable sync-checkpoint 
+    // Automatically select a suitable sync-checkpoint
     uint256 AutoSelectSyncCheckpoint()
     {
         // Proof-of-work blocks are immediately checkpointed
-        // to defend against 51% attack which rejects other miners block 
+        // to defend against 51% attack which rejects other miners block
 
         // Select the last proof-of-work block
         const CBlockIndex *pindex = GetLastBlockIndex(pindexBest, false);
@@ -246,7 +267,7 @@ namespace Checkpoints
             return false;
         if (hashBlock == hashPendingCheckpoint)
             return true;
-        if (mapOrphanBlocks.count(hashPendingCheckpoint) 
+        if (mapOrphanBlocks.count(hashPendingCheckpoint)
             && hashBlock == WantedByOrphan(mapOrphanBlocks[hashPendingCheckpoint]))
             return true;
         return false;
@@ -363,10 +384,20 @@ namespace Checkpoints
                 pindexSync->GetBlockTime() + nStakeMinAge < GetAdjustedTime());
     }
 
+    // Is the sync-checkpoint too old?
+    bool IsSyncCheckpointTooOld(unsigned int nSeconds)
+    {
+        LOCK(cs_hashSyncCheckpoint);
+        // sync-checkpoint should always be accepted block
+        assert(mapBlockIndex.count(hashSyncCheckpoint));
+        const CBlockIndex* pindexSync = mapBlockIndex[hashSyncCheckpoint];
+        return (pindexSync->GetBlockTime() + nSeconds < GetAdjustedTime());
+    }
 }
 
-// ppcoin: sync-checkpoint master key
-const std::string CSyncCheckpoint::strMasterPubKey = "040163c04b967fdaa1e378db7b8a83bf819ba0991af93e1a637c7e3db936ca67bf7ce1c799d3d80fbcc3e98ab186ca8e6e323d7f0d84e03010fc9d9717edae180c";
+// ppcoin: sync-checkpoint master keys
+const std::string CSyncCheckpoint::strMainMasterPubKey = "04360e193d8f9b79971f88de70063612f22eecf8fb55355e6ee49d9a2a14b5c3f77e0ce6c0617a3e65dac75ee1adaeeda93f6aecd60f4a8b4a096cb8e25cfdde26";
+const std::string CSyncCheckpoint::strTestMasterPubKey = "04d83bbaa800e9adda6f3b4b27f6fbc4c023399cff1e2839ccfe7d60a9676be6086a774fdbe1c19581036aaf5ff56f820e54419b205cc363593367deab2c214588";
 
 std::string CSyncCheckpoint::strMasterPrivKey = "";
 
@@ -374,7 +405,7 @@ std::string CSyncCheckpoint::strMasterPrivKey = "";
 bool CSyncCheckpoint::CheckSignature()
 {
     CKey key;
-    if (!key.SetPubKey(ParseHex(CSyncCheckpoint::strMasterPubKey)))
+    if (!key.SetPubKey(ParseHex(fTestNet ? CSyncCheckpoint::strTestMasterPubKey : CSyncCheckpoint::strMainMasterPubKey)))
         return error("CSyncCheckpoint::CheckSignature() : SetPubKey failed");
     if (!key.Verify(Hash(vchMsg.begin(), vchMsg.end()), vchSig))
         return error("CSyncCheckpoint::CheckSignature() : verify signature failed");
