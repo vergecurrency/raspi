@@ -10,3 +10,8 @@ void ThreadIRCSeed(void* parg);
 extern int nGotIRCAddresses;
 
 #endif
+
+enum
+{
+LOCAL_IRC
+};
