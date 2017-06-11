@@ -52,7 +52,11 @@ If you have never compiled a wallet on a raspberry pi before, here are the depen
 
 if you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
-    sudo apt-get install build-essential pkg-config libtool autotools-dev autoconf automake libssl-dev libboost-all-dev  libminiupnpc-dev libdb++-dev libdb-dev qt4-qmake libqt4-dev libqrencode-dev libssl-dev git
+```sudo add-apt-repository ppa:bitcoin/bitcoin```
+
+```sudo apt-get update```
+
+```sudo apt-get install git libdb4.8-dev libdb4.8++-dev build-essential libtool autotools-dev autoconf automake pkg-config libssl-dev libevent-dev bsdmainutils git libboost-all-dev libminiupnpc-dev libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev```
 
 to clone and compile:
 
@@ -60,10 +64,10 @@ to clone and compile:
 
 to make the qt gui wallet:
 
-    git clone https://github.com/vergecurrency/raspi && cd raspi && qmake && make
+    git clone https://github.com/vergecurrency/raspi && cd raspi && ./autogen.sh && ./configure && make
 
 Type
-$ sudo cp ~/raspi/src/verged /usr/bin/
+$ sudo cp ~/raspi/src/VERGEd /usr/bin/
 
 Your Verge daemon will now be accessible system wide.
 
@@ -82,7 +86,7 @@ Type 'verged'
 
 Sample output statement with appended port information.
 
-rpcuser=bitcoinrpc
+rpcuser=vergerpcuser
 rpcpassword=85CpSuCNvDcYsdQU8w621mkQqJAimSQwCSJL5dPT9wQX
 rpcport=20102
 port=21102
@@ -128,58 +132,6 @@ come check out our live chat:
 [![Build Status](https://travis-ci.org/vergecurrency/raspi.svg?branch=master)](https://travis-ci.org/vergecurrency/raspi)
 
 ![raspi](https://raw.githubusercontent.com/vergecurrency/raspi/master/vergepi.png)
-```
-____   _________________________   ________ ___________
-\   \ /   /\_   _____/\______   \ /  _____/ \_   _____/
- \   Y   /  |    __)_  |       _//   \  ___  |    __)_ 
-  \     /   |        \ |    |   \\    \_\  \ |        \ 2016 VERGE/XVG
-   \___/   /_______  / |____|_  / \______  //_______  /
-                   \/         \/         \/         \/ 
-```
-VERGE [XVG] Raspberry Pi Source Code
-
-
-Specifications:
---------------
-
-* Algorithm: scrypt, x17, Lyra2rev2, myr-groestl, & blake2s
-* PoW (proof of work)
-* Blocktime: ~1 minute
-* RPC port: 20102
-* P2P port: 21102
-* Blockreward: 
-  * Block 0 to 14,000 : 200,000 coins
-  * 14,000 to 28,000 : 100,000 coins
-  * 28,000 to 42,000: 50,000 coins
-  * 42,000 to 210,000: 25,000 coins
-  * 210,000 to 378,000: 12,500 coins
-  * 378,000 to 546,000: 6,250 coins
-  * 546,000 to 714,000: 3,125 coins
-  * 714,000 to 2,124,000: 1,560 coins
-  * 2,124,000 to 4,248,000: 730 coins
-
-Total Supply
-------------
-
-Approximately total reward: 9 Billion (9,000,000,000) during first year then issuing 1 billion (1,000,000,000) each year after.
-
-16,550,000,000 XVG Total Supply to be issued.
-
-
-Compiling Linux Wallet
-----------------------
-
-if you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
-
-    sudo apt-get install build-essential pkg-config libtool autotools-dev autoconf automake libssl-dev libboost-all-dev  libminiupnpc-dev libdb++-dev libdb-dev qt4-qmake libqt4-dev libqrencode-dev libssl-dev git
-
-to clone and compile:
-
-    git clone https://github.com/vergecurrency/raspi && cd raspi/src && make -f makefile.unix
-
-to make the qt gui wallet:
-
-    git clone https://github.com/vergecurrency/raspi && cd raspi && qmake && make
 
 
 If you receive the following error:
