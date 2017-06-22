@@ -65,7 +65,7 @@ to clone and compile:
 
 to make the qt gui wallet:
 
-    git clone https://github.com/vergecurrency/raspi && cd raspi && ./autogen.sh && ./configure && make
+    git clone https://github.com/vergecurrency/raspi && cd raspi && ./autogen.sh && ./configure --with-boost-libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2 && make
 
 Type
 $ sudo cp ~/raspi/src/VERGEd /usr/bin/
