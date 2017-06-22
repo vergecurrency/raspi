@@ -29,7 +29,7 @@ before_install
   - chmod a+x ./building/${VERGE_PLATFORM}/requirements.sh
 
 install:
-  - chmod 777 ./building/${VERGE_PLATFORM}/build.sh
+  - chmod +x ./building/${VERGE_PLATFORM}/build.sh
 
 script:
   - chmod +x ./building/${VERGE_PLATFORM}/dist.sh
