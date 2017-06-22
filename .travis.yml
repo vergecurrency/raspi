@@ -25,11 +25,8 @@ matrix:
       file: 'release_mac.zip'
 
 before_install:
-  - chmod 777 /building/common.sh
-  - chmod 777 /share/genbuild.sh
-  - chmod 777 /src/leveldb/build_detect_platform
-  - ./building/common.sh
-  - ./building/${VERGE_PLATFORM}/requirements.sh
+  - chmod a+x ./building/common.sh
+  - chmod a+x ./building/${VERGE_PLATFORM}/requirements.sh
 
 install:
   - ./building/${VERGE_PLATFORM}/build.sh
