@@ -121,26 +121,26 @@ make: *** [obj/checkpoints.o] Error 4
       - Then you can check it is working with linux command (free)
 
 Re-run the Compile command &quot;make -f makefile.unix&quot; after creating the new swap file.
-
+ 
 (Optional) If you have to compile BerkeleyDB4.8:
-
-cd ~
-wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
-tar -xzvf db-4.8.30.NC.tar.gz
-cd db-4.8.30.NC/build_unix
-../dist/configure --enable-cxx
-make
-make install
-ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
-
+ 
+ - cd ~
+ - wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
+ - tar -xzvf db-4.8.30.NC.tar.gz
+ - cd db-4.8.30.NC/build_unix
+ - ../dist/configure --enable-cxx
+ - make
+ - make install
+ - ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
+ 
 redo compilation:
-
-cd ~raspi
-make clean
-./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2
-make
-make install
-
+ 
+ - cd ~raspi
+ - make clean
+ - ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-          libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2
+ - make
+ - make install
+ 
 Live Chat
 ---------
 
