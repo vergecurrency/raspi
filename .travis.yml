@@ -31,6 +31,7 @@ before_install:
   - ./building/${VERGE_PLATFORM}/requirements.sh
 install:
   - chmod +x ./building/${VERGE_PLATFORM}/build.sh
+  - chmod +x ./autogen.sh
   - ./building/${VERGE_PLATFORM}/build.sh
 
 script:
