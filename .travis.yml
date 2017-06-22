@@ -24,7 +24,7 @@ matrix:
       compiler: clang 
       file: 'release_mac.zip'
 
-before_install
+before_install:
   - chmod a+x ./building/common.sh
   - chmod a+x ./building/${VERGE_PLATFORM}/requirements.sh
 
