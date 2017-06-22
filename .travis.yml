@@ -29,10 +29,10 @@ before_install:
   - chmod a+x ./building/${VERGE_PLATFORM}/requirements.sh
 
 install:
-  - ./building/${VERGE_PLATFORM}/build.sh
+  - chmod a+x ./building/${VERGE_PLATFORM}/build.sh
 
 script:
-  - ./building/${VERGE_PLATFORM}/dist.sh
+  - chmod a+x ./building/${VERGE_PLATFORM}/dist.sh
 
 deploy: 
   provider: releases
