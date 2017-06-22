@@ -32,6 +32,8 @@ before_install:
 install:
   - chmod +x ./building/${VERGE_PLATFORM}/build.sh
   - chmod +x ./autogen.sh
+  - chmod +x ./share/genbuild.sh
+  - chmod +x ./src/leveldb/build_detect_platform
   - ./building/${VERGE_PLATFORM}/build.sh
 
 script:
