@@ -118,12 +118,11 @@ make: *** [obj/checkpoints.o] Error 4
   - Then you edit your fstab $sudo nano /etc/fstab
     - append the following
     - /swapfile1 swap swap defaults 0 0
-      - Then you can check it is working with &#39;free �m&#39;
+      - Then you can check it is working with linux command (free)
 
 Re-run the Compile command &quot;make -f makefile.unix&quot; after creating the new swap file.
 
-(Optional)
-If you have to compile BerkeleyDB4.8:
+(Optional) If you have to compile BerkeleyDB4.8:
 
 cd ~
 wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz
