@@ -10,3 +10,4 @@ void ThreadIRCSeed(void* parg);
 extern int nGotIRCAddresses;
 
 #endif
+
