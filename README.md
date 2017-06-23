@@ -135,7 +135,7 @@ Re-run the Compile command &quot;make -f makefile.unix&quot; after creating the 
  
 redo compilation:
  
- - cd ~raspi
+ - cd ~/raspi
  - make clean
  - ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-          libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2
  - make
