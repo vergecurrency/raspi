@@ -133,16 +133,16 @@ Re-run the Compile command &quot;make -f makefile.unix&quot; after creating the 
  - cd db-4.8.30.NC/build_unix
  - ../dist/configure --enable-cxx
  - make
- - make install
+ - sudo make install
  - ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
  
 redo compilation:
  
  - cd ~/raspi
  - make clean
- - ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-          libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2
+ - ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2
  - make
- - make install
+ - sudo make install
  
 Live Chat
 ---------
