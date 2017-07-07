@@ -49,9 +49,13 @@ Approximately total reward: 9 Billion (9,000,000,000) during first year then iss
 
 Compiling Linux Wallet
 #########################################################################
-If you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
-if you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
+No Brainer, skip below and do:
+cd ~
+git clone https://github.com/vergecurrency/raspi
+sudo sh go.sh
+
+If you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
 ```sudo add-apt-repository ppa:bitcoin/bitcoin```
 
