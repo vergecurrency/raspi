@@ -106,6 +106,18 @@ AC_ARG_ENABLE([lcov],
   [enable lcov testing (default is no)])],
   [use_lcov=yes],
   [use_lcov=no])
+  
+AC_ARG_ENABLE([sse2],
+  [AS_HELP_STRING([--enable-sse2],
+  [enable SSE/SSE2 optimizations (default is yes)])],
+  [have_sse2=$enableval],
+  [have_sse2=yes])
+AC_MSG_CHECKING([whether enable SSE/SSE2 optimizations])
+if test "$have_sse2" = "yes"; then
+    AC_DEFINE([HAVE_SSE2],1,[Define to enable SSE/SSE2 optimizations.])
+fi
+AC_MSG_RESULT($have_sse2)
+AM_CONDITIONAL([HAVE_SSE2],[test x"$have_sse2" = x"yes"])
 
 AC_ARG_ENABLE([glibc-back-compat],
   [AS_HELP_STRING([--enable-glibc-back-compat],
