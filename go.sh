@@ -34,7 +34,7 @@ chmod 777 ~/raspi/share/genbuild.sh
 chmod 777 ~/raspi/src/leveldb/build_detect_platform
 cd ~/raspi 
 make clean 
-./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost- libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2 
+./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2 
 make 
 sudo strip ~/raspi/src/VERGEd
 sudo strip ~/raspi/src/qt/VERGE-qt
