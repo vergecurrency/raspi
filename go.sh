@@ -18,6 +18,7 @@ sudo apt-get -y install git build-essential libtool autotools-dev autoconf autom
 cd ~
 wget http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz 
 tar -xzvf db-4.8.30.NC.tar.gz 
+rm db-4.8.30.NC.tar.gz
 cd db-4.8.30.NC/build_unix 
 ../dist/configure --enable-cxx 
 make clean
