@@ -43,7 +43,7 @@ cd ~
 #// Create the config file with random user and password
 
 mkdir ~/.VERGE
-echo "rpcuser="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26 ; echo '') $'\n'"rpcpassword="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26 ; echo '') $'\n'"rpcport=20102" $'\n'"port=21102"$'\n'"daemon=1"$'\n'"listen=1" > ~/.VERGE/VERGE.conf
+echo "rpcuser="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26 ; echo '') '\n'"rpcpassword="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26 ; echo '') '\n'"rpcport=20102" '\n'"port=21102" '\n'"daemon=1" '\n'"listen=1" > ~/.VERGE/VERGE.conf
 
 #// Extract http link, download blockchain and install it.
 
