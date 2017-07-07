@@ -106,7 +106,7 @@ AC_ARG_ENABLE([lcov],
   [enable lcov testing (default is no)])],
   [use_lcov=yes],
   [use_lcov=no])
-
+  
 AC_ARG_ENABLE([sse2],
   [AS_HELP_STRING([--enable-sse2],
   [enable SSE/SSE2 optimizations (default is yes)])],

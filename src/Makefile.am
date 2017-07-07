@@ -222,7 +222,7 @@ VERGEd_LDADD = \
 
 if HAVE_SSE2
 libbitcoin_sse2_a_SOURCES = scrypt-sse2.cpp
-libbitcoin_sse2_a_CPPFLAGS = $(BITCOIN_INCLUDES) -msse2 -mstackrealign
+libbitcoin_sse2_a_CPPFLAGS = $(BITCOIN_INCLUDES) -mstackrealign
 VERGEd_LDADD += libbitcoin_sse2.a
 endif
 

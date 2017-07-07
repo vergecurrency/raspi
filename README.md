@@ -49,9 +49,12 @@ Approximately total reward: 9 Billion (9,000,000,000) during first year then iss
 
 Compiling Linux Wallet
 #########################################################################
-If you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
-if you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
+No Brainer, skip below and do:
+
+cd ~ && git clone https://github.com/vergecurrency/raspi && cd raspi && sudo sh go.sh
+
+If you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
 ```sudo add-apt-repository ppa:bitcoin/bitcoin```
 
@@ -130,16 +133,16 @@ Re-run the Compile command &quot;make -f makefile.unix&quot; after creating the 
  - cd db-4.8.30.NC/build_unix
  - ../dist/configure --enable-cxx
  - make
- - make install
+ - sudo make install
  - ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
  
 redo compilation:
  
  - cd ~/raspi
  - make clean
- - ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-          libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2
+ - ./configure CPPFLAGS="-I/usr/local/BerkeleyDB.4.8/include -O2" LDFLAGS="-L/usr/local/BerkeleyDB.4.8/lib" --with-boost-libdir=/usr/lib/arm-linux-gnueabihf --with-gui=qt5 --disable-sse2
  - make
- - make install
+ - sudo make install
  
 Live Chat
 ---------
