@@ -28,6 +28,7 @@ sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
 
 #// Clone files from repo, Permissions and make
 cd ~
+rm -Rf db-4.8.30.NC
 git clone https://github.com/vergecurrency/raspi
 cd raspi
 sudo sh autogen.sh
@@ -39,6 +40,7 @@ make clean
 make 
 sudo strip ~/raspi/src/VERGEd
 sudo strip ~/raspi/src/qt/VERGE-qt
+sudo make install
 cd ~
 
 #// Create the config file with random user and password
@@ -54,6 +56,20 @@ sh link.sh
 unzip -o Verge-Blockchain*.zip -d ~/.VERGE
 rm Verge-Blockchain*.zip
 
+# Create Icon on Desktop and in menu
+
+sudo cp ~/raspi/vergepi.png /usr/share/icons/
+sudo apt-get -y install --no-install-recommends gnome-panel
+echo '#!/usr/bin/env xdg-open''\n'"[Desktop Entry]"'\n'"Version=1.0"'\n'"Type=Application"'\n'"Terminal=false"'\n'"Icon[en]=/usr/share/icons/vergepi.png"'\n'"Name[en]=VERGE"'\n'"Exec=VERGE-qt"'\n'"Name=VERGE"'\n'"Icon=/usr/share/icons/vergepi.png"'\n'"Categories=Network;Internet;" > ~/Desktop/VERGE.desktop
+sudo chmod +x ~/Desktop/VERGE.desktop
+sudo cp ~/Desktop/VERGE.desktop /usr/share/applications/VERGE.desktop
+sudo chmod +x /usr/share/applications/VERGE.desktop
+
+# Erase all raspi compilation directory , cleaning
+
+cd ~
+rm -Rf ~/raspi
+
 #// Start Verge
 
-./raspi/src/qt/VERGE-qt
+VERGE-qt
