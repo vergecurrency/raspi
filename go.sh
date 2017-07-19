@@ -6,6 +6,8 @@ sudo chown root:root /swapfile1
 sudo chmod 0600 /swapfile1
 sudo swapon /swapfile1
 
+sudo apt-get -y install software-properties-common
+
 sudo add-apt-repository ppa:bitcoin/bitcoin
 
 sudo apt-get update
@@ -54,6 +56,7 @@ echo "rpcuser="$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 26 ; echo '') '\
 sudo apt-get -y install lynx
 echo "wget" $(lynx --dump --listonly http://vergecurrency.de | grep -o "http:*.*zip") > link.sh
 sh link.sh
+sudo apt-get -y install unzip
 unzip -o Verge-Blockchain*.zip -d ~/.VERGE
 rm Verge-Blockchain*.zip
 
