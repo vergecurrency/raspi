@@ -52,7 +52,7 @@ Compiling Linux Wallet
 
 No Brainer, skip below and do:
 
-cd ~ && git clone https://github.com/vergecurrency/raspi && cd raspi && sudo sh go.sh
+cd ~ && git clone https://github.com/vergecurrency/raspi && cd raspi && sh go.sh
 
 If you have never compiled a wallet on a raspberry pi before, here are the dependencies you will need:
 
