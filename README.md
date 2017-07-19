@@ -149,3 +149,5 @@ Live Chat
 
 come check out our live chat:
 [![Visit our IRC Chat!](https://kiwiirc.com/buttons/chat.freenode.net/verge.png)](https://kiwiirc.com/client/chat.freenode.net/?nick=xvg|?&theme=cli#verge)
+
+badbrainirc: DGbYZXxDpkHiMCGNGuf24vJf8jm8pgbRhp
