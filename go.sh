@@ -31,7 +31,7 @@ sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so /usr/lib/libdb_cxx-4.8
 
 #// Clone files from repo, Permissions and make
 cd ~
-rm -Rf db-4.8.30.NC
+sudo rm -Rf db-4.8.30.NC
 git clone https://github.com/vergecurrency/raspi
 cd raspi
 sudo sh autogen.sh
@@ -58,7 +58,7 @@ echo "wget" $(lynx --dump --listonly http://vergecurrency.de | grep -o "http:*.*
 sh link.sh
 sudo apt-get -y install unzip
 unzip -o Verge-Blockchain*.zip -d ~/.VERGE
-rm Verge-Blockchain*.zip
+sudo rm Verge-Blockchain*.zip
 
 # Create Icon on Desktop and in menu
 
@@ -72,7 +72,7 @@ sudo chmod +x /usr/share/applications/VERGE.desktop
 # Erase all raspi compilation directory , cleaning
 
 cd ~
-rm -Rf ~/raspi
+sudo rm -Rf ~/raspi
 
 #// Start Verge
 
