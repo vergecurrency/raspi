@@ -25,6 +25,7 @@ make clean
 make 
 sudo make install 
 sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb-4.8.so /usr/lib/libdb-4.8.so
+sudo ln -s /usr/local/BerkeleyDB.4.8/lib/libdb_cxx-4.8.so /usr/lib/libdb_cxx-4.8.so
 
 #// Clone files from repo, Permissions and make
 cd ~
